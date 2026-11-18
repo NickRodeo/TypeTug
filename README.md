@@ -100,8 +100,8 @@ tugtype/
 
 ```bash
 # Clone
-git clone https://github.com/<your-username>/tugtype.git
-cd tugtype
+git clone https://github.com/NickRodeo/TypeTug
+cd TypeTug
 
 # Create a virtual environment
 python -m venv .venv
