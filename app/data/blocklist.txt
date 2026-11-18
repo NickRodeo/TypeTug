@@ -1,0 +1,1 @@
+# One lowercase word per line. Words listed here never appear in a match.

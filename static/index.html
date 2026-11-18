@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TugType</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Home: name, then lobby -->
+  <main id="home" class="screen">
+    <h1>TugType</h1>
+    <p class="tagline">Type faster than the other team and pull the rope to your side.</p>
+
+    <form id="name-form" class="row">
+      <label for="name">Your name</label>
+      <input id="name" maxlength="16" autocomplete="nickname" required>
+      <button type="submit">Play</button>
+    </form>
+
+    <section id="lobby" hidden>
+      <fieldset id="size-picker">
+        <legend>Match format</legend>
+        <label><input type="radio" name="size" value="1" checked> 1v1</label>
+        <label><input type="radio" name="size" value="2"> 2v2</label>
+        <label><input type="radio" name="size" value="3"> 3v3</label>
+        <label><input type="radio" name="size" value="4"> 4v4</label>
+        <label><input type="radio" name="size" value="5"> 5v5</label>
+      </fieldset>
+
+      <div class="row">
+        <button id="find-match">Find a match</button>
+        <button id="create-room" class="secondary">Create a room</button>
+      </div>
+      <p id="queue-status" role="status"></p>
+      <button id="cancel-queue" class="secondary" hidden>Cancel search</button>
+
+      <form id="join-form" class="row">
+        <label for="join-code">Have a room code?</label>
+        <input id="join-code" maxlength="4" autocomplete="off" spellcheck="false" required>
+        <button type="submit" class="secondary">Join room</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Custom room: pick teams, host starts -->
+  <main id="room" class="screen" hidden>
+    <h1>Room <span id="room-code"></span></h1>
+    <p class="tagline">Format <span id="room-format"></span>. Share the code so others can join.</p>
+    <div class="teams">
+      <section class="team team-a">
+        <h2>Red team</h2>
+        <ul id="team-A"></ul>
+        <button id="join-team-A">Join red</button>
+      </section>
+      <section class="team team-b">
+        <h2>Blue team</h2>
+        <ul id="team-B"></ul>
+        <button id="join-team-B">Join blue</button>
+      </section>
+    </div>
+    <p id="unassigned" role="status"></p>
+    <div class="row">
+      <button id="start-room" hidden disabled>Start match</button>
+      <button id="leave-room" class="secondary">Leave room</button>
+    </div>
+  </main>
+
+  <!-- Match -->
+  <main id="game" class="screen" hidden>
+    <div class="arena-panel">
+      <canvas id="arena" aria-label="Tug of war arena"></canvas>
+      <div id="timer" aria-live="off"></div>
+      <div id="overlay" hidden>
+        <h2 id="overlay-title"></h2>
+        <p id="overlay-text"></p>
+        <button id="back-to-lobby" hidden>Back to lobby</button>
+      </div>
+    </div>
+    <div id="word" aria-label="Current word"></div>
+    <div id="next-words"></div>
+    <input id="typing" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type the word shown" disabled>
+  </main>
+
+  <div id="toast" role="status"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
